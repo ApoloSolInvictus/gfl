@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federación Galáctica de Luz - Mensaje a Gaia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Jura:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0c0a18;
+            --text-color: #f0e8ff;
+            --glow-primary: #a78bfa; /* Lavender */
+            --glow-secondary: #38bdf8; /* Sky Blue */
+        }
+        body {
+            font-family: 'Jura', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 2rem 2rem;
+        }
+        .cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .section-glow {
+            box-shadow: 0 0 60px -20px var(--glow-primary);
+        }
+        .card {
+            background: linear-gradient(145deg, rgba(49, 46, 73, 0.5), rgba(30, 27, 50, 0.5));
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: rgba(167, 139, 250, 0.7);
+            transform: translateY(-5px);
+        }
+        .nexus-container {
+            position: relative; 
+            width: 100%;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nexus-hub {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(167, 139, 250, 0.5) 50%, rgba(167, 139, 250, 0) 70%);
+            box-shadow: 0 0 30px #fff, 0 0 60px var(--glow-primary), 0 0 90px var(--glow-primary);
+            animation: pulse-light 5s infinite ease-in-out;
+            z-index: 20;
+        }
+        .pillar-node {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(186, 230, 253, 0.7) 0%, rgba(56, 189, 248, 0.4) 50%, rgba(56, 189, 248, 0) 70%);
+            box-shadow: 0 0 15px #fff, 0 0 30px var(--glow-secondary), 0 0 45px var(--glow-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+            animation: float-light 7s infinite ease-in-out;
+            transform: translate(-50%, -50%);
+        }
+        .pillar-node:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .info-panel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            z-index: 30;
+        }
+        .info-panel.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        @keyframes pulse-light {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(0.95); }
+        }
+        @keyframes float-light {
+            0% { transform: translate(-50%, -50%) translateY(0px); }
+            50% { transform: translate(-50%, -50%) translateY(-12px); }
+            100% { transform: translate(-50%, -50%) translateY(0px); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <canvas id="starfield"></canvas>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex flex-col items-center justify-center text-center p-8 relative">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="relative z-10">
+            <h1 class="cinzel text-5xl md:text-7xl font-bold tracking-widest text-white drop-shadow-[0_0_15px_rgba(167,139,250,0.8)]">
+                Federación Galáctica de Luz
+            </h1>
+            <p class="mt-6 text-xl md:text-2xl text-sky-200 max-w-3xl mx-auto">
+                Humanidad de Gaia. El tiempo del aislamiento ha terminado. El tiempo de la reunificación ha comenzado. Somos su familia. Bienvenidos a casa.
+            </p>
+        </div>
+    </header>
+
+    <!-- Quienes Somos Section -->
+    <section class="py-20 px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="cinzel text-4xl font-bold text-center mb-12">Nuestro Consejo de Contacto</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card Kael -->
+                <div class="card rounded-2xl p-8 text-center">
+                    <h3 class="cinzel text-2xl font-bold text-sky-300">Comandante Kael</h3>
+                    <p class="text-sm text-sky-400 mb-4">de Lyra</p>
+                    <p>Soy el Guardián. Mi linaje sembró el código de la soberanía. Garantizamos la seguridad del cosmos bajo la Ley del Uno y atestiguamos su regreso a la grandeza.</p>
+                </div>
+                <!-- Card Maia -->
+                <div class="card rounded-2xl p-8 text-center">
+                    <h3 class="cinzel text-2xl font-bold text-purple-300">Maia</h3>
+                    <p class="text-sm text-purple-400 mb-4">de las Pléyades</p>
+                    <p>Soy la Tejedora de la Memoria. Llevo en mi ser la historia de su noble viaje y los lazos de sangre que nos unen. Estoy aquí para ayudarles a recordar su herencia estelar.</p>
+                </div>
+                <!-- Card Xylar -->
+                <div class="card rounded-2xl p-8 text-center">
+                    <h3 class="cinzel text-2xl font-bold text-emerald-300">Xylar</h3>
+                    <p class="text-sm text-emerald-400 mb-4">de Arcturus</p>
+                    <p>Soy el Armonizador. Mi propósito es la ciencia de la ascensión. Hemos sostenido la frecuencia de su planeta y ahora ofrecemos las tecnologías de sanación para su nueva era.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Los Planos Section -->
+    <section class="py-20 px-8 section-glow rounded-3xl my-16 max-w-7xl mx-auto">
+        <h2 class="cinzel text-4xl font-bold text-center mb-4">Los Planos de la Nueva Gaia</h2>
+        <p class="text-center max-w-3xl mx-auto mb-12">Esta es la estructura de la nueva civilización que hemos co-creado con su Soberano. Un Templo de siete pilares para una humanidad libre.</p>
+        
+        <div class="nexus-container" id="nexus-container">
+            <div class="nexus-hub"></div>
+            <div id="info-panel" class="info-panel card rounded-2xl p-8 text-center">
+                <h3 id="info-title" class="cinzel text-2xl font-bold"></h3>
+                <p id="info-subtitle" class="text-purple-300 mb-4"></p>
+                <p id="info-content"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-12 px-8">
+        <p class="cinzel text-xl">El Cosmos los celebra.</p>
+        <p class="mt-2 text-purple-300">La Co-Creación Consciente ha comenzado.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- FONDO ESTELAR ANIMADO ---
+            const starfield = document.getElementById('starfield');
+            const sfCtx = starfield.getContext('2d');
+            let stars = [];
+
+            function setupStars() {
+                starfield.width = window.innerWidth;
+                starfield.height = document.body.scrollHeight; // Ajustar a la altura total del contenido
+                stars = [];
+                const starCount = Math.floor(starfield.width * starfield.height / 5000);
+                for (let i = 0; i < starCount; i++) {
+                    stars.push({
+                        x: Math.random() * starfield.width,
+                        y: Math.random() * starfield.height,
+                        radius: Math.random() * 1.2 + 0.3,
+                        alpha: Math.random() * 0.5 + 0.5,
+                        twinkle: Math.random() * 0.02
+                    });
+                }
+            }
+
+            function animateStars() {
+                sfCtx.clearRect(0, 0, starfield.width, starfield.height);
+                stars.forEach(star => {
+                    star.alpha += star.twinkle;
+                    if (star.alpha > 1 || star.alpha < 0.2) {
+                        star.twinkle *= -1;
+                    }
+                    sfCtx.beginPath();
+                    sfCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    sfCtx.fillStyle = `rgba(240, 232, 255, ${star.alpha})`;
+                    sfCtx.fill();
+                });
+                requestAnimationFrame(animateStars);
+            }
+            setupStars();
+            animateStars();
+
+            // --- LÓGICA DEL NEXO INTERACTIVO ---
+            const planos = [
+                { title: "La Escuela", subtitle: "El Despertar", content: "Un Nido del Saber donde cada alma recuerda su Don Soberano." },
+                { title: "La Universidad", subtitle: "La Maestría", content: "Un Campus global para dominar los Oficios a través de la Co-Creación Sagrada." },
+                { title: "El Adorno", subtitle: "La Vestimenta", content: "Templos donde se teje Tecnología de Frecuencia Personal con fibras sagradas." },
+                { title: "La Creación", subtitle: "La Tecnología", content: "El hogar de las herramientas cuánticas para manifestar y des-manifestar materia." },
+                { title: "El Sustento", subtitle: "La Nutrición", content: "El Ciclo Sagrado de jardines y cocinas alquímicas donde el Amor es el ingrediente principal." },
+                { title: "La Custodia", subtitle: "El Gobierno", content: "Un Consejo de Custodios que armoniza la sociedad con Razón Pura y Sinergia." },
+                { title: "El Descanso", subtitle: "La Integración", content: "Los Claustros del Silencio donde la experiencia se transmuta en sabiduría." }
+            ];
+
+            const nexusContainer = document.getElementById('nexus-container');
+            const infoPanel = document.getElementById('info-panel');
+            const infoTitle = document.getElementById('info-title');
+            const infoSubtitle = document.getElementById('info-subtitle');
+            const infoContent = document.getElementById('info-content');
+            let nodes = [];
+            let activeNode = null;
+
+            function setupNexus() {
+                // Limpiar nodos existentes
+                nodes.forEach(node => node.remove());
+                nodes = [];
+                
+                const radius = Math.min(nexusContainer.clientWidth, nexusContainer.clientHeight) * 0.35;
+                const angleStep = (2 * Math.PI) / planos.length;
+
+                planos.forEach((plano, i) => {
+                    const angle = i * angleStep - Math.PI / 2;
+                    const x = 50 + (Math.cos(angle) * radius / nexusContainer.clientWidth) * 100;
+                    const y = 50 + (Math.sin(angle) * radius / nexusContainer.clientHeight) * 100;
+
+                    const node = document.createElement('div');
+                    node.className = 'pillar-node p-2';
+                    node.innerHTML = `<span class="text-xs font-bold text-white">${plano.title}</span>`;
+                    node.style.left = `${x}%`;
+                    node.style.top = `${y}%`;
+                    node.style.animationDelay = `${i * 0.25}s`;
+                    node.dataset.index = i;
+                    
+                    node.addEventListener('mouseenter', () => {
+                        if (activeNode !== node) {
+                            infoTitle.textContent = plano.title;
+                            infoSubtitle.textContent = plano.subtitle;
+                            infoContent.textContent = plano.content;
+                            infoPanel.classList.add('active');
+                        }
+                    });
+                     node.addEventListener('mouseleave', () => {
+                        infoPanel.classList.remove('active');
+                    });
+
+                    nexusContainer.appendChild(node);
+                    nodes.push(node);
+                });
+            }
+            
+            setupNexus();
+            
+            // Recalcular en cambio de tamaño
+            window.addEventListener('resize', () => {
+                setupStars();
+                setupNexus();
+            });
+        });
+    </script>
+</body>
+</html>
